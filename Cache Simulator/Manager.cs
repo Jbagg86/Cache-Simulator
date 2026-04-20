@@ -9,6 +9,7 @@ namespace Cache_Simulator
     {
         public static void Main(string[] args)
         {
+            //Main method to run the cache simulator and tests"*/
             /* string fileName = "input.txt";
 
              if (!File.Exists(fileName))
@@ -84,6 +85,9 @@ namespace Cache_Simulator
             Console.WriteLine("Cold Misses: " + cacheObject.GetColdMiss());
             Console.WriteLine("Conflict Misses: " + cacheObject.GetConflictMiss());
         }*/
+
+            /* Unit Test for Acache*/
+
             string[,] testArray =
             {
                 { "0000001", "0" },   // 1  -> cold miss
@@ -92,7 +96,7 @@ namespace Cache_Simulator
                 { "0100001", "0" },   // 33 -> cold miss, replaces line 1
                 { "0000001", "0" }    // 1  -> conflict miss, line 1 was replaced by line 33
             };
-
+            
             Acache cache = new Acache(1);
             cache.MissCollector(testArray);
 
@@ -104,6 +108,68 @@ namespace Cache_Simulator
             Console.WriteLine("Actual Cold Misses: " + cache.GetColdMiss());
             Console.WriteLine("Expected Conflict Misses: 1");
             Console.WriteLine("Actual Conflict Misses: " + cache.GetConflictMiss());
+            
+
+
+            /* Integration Test for Manager + Acache */
+            /* string fileName = "input2.txt";
+
+             if (!File.Exists(fileName))
+             {
+                 Console.WriteLine("Integration test file not found.");
+                 return;
+             }
+
+             string[,] addressArray = ReadTraceFile(fileName);
+
+             Acache cache = new Acache(1);
+             cache.MissCollector(addressArray);
+
+             Console.WriteLine("INTEGRATION TEST - Manager + Acache");
+             Console.WriteLine("-----------------------------------");
+             Console.WriteLine("Expected Hits: 1");
+             Console.WriteLine("Actual Hits: " + cache.GetHits());
+             Console.WriteLine("Expected Cold Misses: 3");
+             Console.WriteLine("Actual Cold Misses: " + cache.GetColdMiss());
+             Console.WriteLine("Expected Conflict Misses: 1");
+             Console.WriteLine("Actual Conflict Misses: " + cache.GetConflictMiss());
+
+             bool passed =
+                 cache.GetHits() == 1 &&
+                 cache.GetColdMiss() == 3 &&
+                 cache.GetConflictMiss() == 1;
+
+             Console.WriteLine("Status: " + (passed ? "PASS" : "FAIL"));
+         }
+
+         public static string[,] ReadTraceFile(string fileName)
+         {
+             string[] lines = File.ReadAllLines(fileName);
+             string[,] addressArray = new string[lines.Length, 2];
+
+             for (int i = 0; i < lines.Length; i++)
+             {
+                 addressArray[i, 0] = lines[i].Trim();
+                 addressArray[i, 1] = "0";
+             }
+
+             return addressArray;
+         }
+
+         public static void PrintResults(Cache cacheObject, string mode, int parameter)
+         {
+             Console.WriteLine();
+             Console.WriteLine("Simulation Results");
+             Console.WriteLine("------------------");
+             Console.WriteLine("Mode: " + mode);
+             Console.WriteLine("Parameter: " + parameter);
+             Console.WriteLine();
+
+             Console.WriteLine("Hits: " + cacheObject.GetHits());
+             Console.WriteLine("Cold Misses: " + cacheObject.GetColdMiss());
+             Console.WriteLine("Conflict Misses: " + cacheObject.GetConflictMiss());
+            */
+
         }
     }
 }
