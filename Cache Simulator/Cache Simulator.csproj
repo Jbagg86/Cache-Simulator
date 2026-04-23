@@ -6,13 +6,11 @@
     <RootNamespace>Cache_Simulator</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>Cache_Simulator.Manager</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="input.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="input2.txt">
+    <None Update="traces.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

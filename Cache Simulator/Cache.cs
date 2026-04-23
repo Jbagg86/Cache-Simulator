@@ -2,6 +2,9 @@
 
 namespace Cache_Simulator
 {
+    // Cache is the parent class for both Acache and Bcache.
+    // It stores the counters used by both cache types:
+    // hits, cold misses, and conflict misses.
     public abstract class Cache
     {
         protected int hits;
@@ -38,6 +41,9 @@ namespace Cache_Simulator
             conflictMiss = z;
         }
 
+        
+        // MissCollector is overridden in each child class because
+        // Acache and Bcache handle addresses differently.
         public abstract int MissCollector(string[,] addressArray);
     }
 }
