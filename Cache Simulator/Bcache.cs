@@ -48,7 +48,7 @@ namespace Cache_Simulator
                 }
             }
         }
-
+        // MissCollector processes each address in the input array and updates the hit/miss counters.
         public override int MissCollector(string[,] addressArray)
         {
             for (int i = 0; i < addressArray.GetLength(0); i++)
@@ -92,7 +92,7 @@ namespace Cache_Simulator
 
             return GetHits() + GetColdMiss() + GetConflictMiss();
         }
-
+        // Checks if the given address is currently stored in the cache.
         private bool IsInCache(string address)
         {
             for (int r = 0; r < cacheBlocks.GetLength(0); r++)
@@ -108,14 +108,14 @@ namespace Cache_Simulator
 
             return false;
         }
-
+        // For block size 1, simply insert the single address into the correct row.
         private void InsertSingleBlock(string address)
         {
             int addressValue = Convert.ToInt32(address, 2);
             int row = addressValue % 32;
             cacheBlocks[row, 0] = address;
         }
-
+        // For block sizes 2 and 4, calculate the starting address of the block and insert all addresses in the block.
         private void InsertPrefetchedBlock(string address)
         {
             int addressValue = Convert.ToInt32(address, 2);

@@ -32,7 +32,7 @@ namespace Cache_Simulator
                 cacheLines[i] = "";
             }
         }
-
+        // MissCollector processes each address in the input array and updates the hit/miss counters.
         public override int MissCollector(string[,] addressArray)
         {
             for (int i = 0; i < addressArray.GetLength(0); i++)

@@ -11,6 +11,7 @@ namespace Cache_Simulator
         protected int coldMiss;
         protected int conflictMiss;
 
+        // Getters and setters for the counters, used by both Acache and Bcache.
         public int GetHits()
         {
             return hits;

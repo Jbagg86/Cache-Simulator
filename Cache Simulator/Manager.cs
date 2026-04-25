@@ -7,6 +7,7 @@ namespace Cache_Simulator
     // This version reads addresses from an input file.
     public class Manager
     {
+        // Main method to run the cache simulator
         public static void Main(string[] args)
         {
             string fileName = "traces.txt";
@@ -16,7 +17,7 @@ namespace Cache_Simulator
                 Console.WriteLine("Error: Input file not found.");
                 return;
             }
-
+            // Read the trace file and store addresses in a 2D array
             string[,] addressArray = ReadTraceFile(fileName);
 
             Console.WriteLine("Cache Simulator");
@@ -25,27 +26,31 @@ namespace Cache_Simulator
             Console.Write("Enter A for Acache (Associativity) or B for Bcache (Block Size): ");
             string? choiceInput = Console.ReadLine();
 
+            // Validate user input for cache type selection
             if (string.IsNullOrWhiteSpace(choiceInput))
             {
                 Console.WriteLine("Error: You must enter A or B.");
                 return;
             }
-
+            
             char choice = char.ToUpper(choiceInput[0]);
 
+            // Declare a Cache variable to hold the selected cache simulation object
             Cache cacheObject;
 
+            // Validate user input and run the appropriate cache simulation
             if (choice == 'A')
             {
                 Console.Write("Enter Ap (1 = Direct Mapped, 32 = Fully Associative): ");
                 string? apInput = Console.ReadLine();
 
+                // Validate user input for associativity selection
                 if (!int.TryParse(apInput, out int ap) || (ap != 1 && ap != 32))
                 {
                     Console.WriteLine("Error: Ap must be 1 or 32.");
                     return;
                 }
-
+                
                 Console.WriteLine();
                 Console.WriteLine("Running Associativity Cache Simulation...");
                 Console.WriteLine("-----------------------------------------");
@@ -54,11 +59,13 @@ namespace Cache_Simulator
                 cacheObject.MissCollector(addressArray);
                 PrintResults(cacheObject, "Acache", ap);
             }
+            
             else if (choice == 'B')
             {
                 Console.Write("Enter Bp (1, 2, or 4): ");
                 string? bpInput = Console.ReadLine();
 
+                // Validate user input for block size selection
                 if (!int.TryParse(bpInput, out int bp) || (bp != 1 && bp != 2 && bp != 4))
                 {
                     Console.WriteLine("Error: Bp must be 1, 2, or 4.");
@@ -79,7 +86,7 @@ namespace Cache_Simulator
                 return;
             }
         }
-
+        //Reads the trace file and returns a 2D array of addresses and their initial status.
         public static string[,] ReadTraceFile(string fileName)
         {
             string[] lines = File.ReadAllLines(fileName);
@@ -93,7 +100,7 @@ namespace Cache_Simulator
                     validCount++;
                 }
             }
-
+            // Create a 2D array to hold valid addresses and their initial status (0 for not accessed)
             string[,] addressArray = new string[validCount, 2];
 
             int row = 0;
@@ -109,7 +116,7 @@ namespace Cache_Simulator
 
             return addressArray;
         }
-
+        // Prints the results of the cache simulation, including hits, cold misses, and conflict misses.
         public static void PrintResults(Cache cacheObject, string mode, int parameter)
         {
             Console.WriteLine();
